@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, graphql } from 'gatsby'
 import get from 'lodash/get'
 import Helmet from 'react-helmet'
+import Img from 'gatsby-image'
 
 import Bio from '../components/Bio'
 import Layout from '../components/layout'
@@ -9,6 +10,7 @@ import { rhythm } from '../utils/typography'
 
 class BlogIndex extends React.Component {
   render() {
+    // const ImgFluid = get(this, 'props.data.site.siteMetadata.thumbnail')
     const siteTitle = get(this, 'props.data.site.siteMetadata.title')
     const siteDescription = get(
       this,
@@ -26,13 +28,17 @@ class BlogIndex extends React.Component {
         <Bio />
         {posts.map(({ node }) => {
           const title = get(node, 'frontmatter.title') || node.fields.slug
+          const fluidImg = get(node, 'frontmatter.thumbnail.childImageSharp.fluid')
           return (
-            <div key={node.fields.slug}>
+            <div key={node.fields.slug}
+                 style={{ backgroundColor: 'white'}}>
               <h3
                 style={{
                   marginBottom: rhythm(1 / 4),
+                  backgroundColor: 'blueviolet'
                 }}
               >
+                <Img fluid={fluidImg} />
                 <Link style={{ boxShadow: 'none' }} to={node.fields.slug}>
                   {title}
                 </Link>
@@ -67,6 +73,13 @@ export const pageQuery = graphql`
           frontmatter {
             date(formatString: "DD MMMM, YYYY")
             title
+            thumbnail {
+                childImageSharp {
+                    fluid(maxWidth: 150) {
+                        ...GatsbyImageSharpFluid
+                    }
+                }
+            }  
           }
         }
       }

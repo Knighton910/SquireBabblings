@@ -16,6 +16,7 @@ class Template extends React.Component {
             ...scale(1.5),
             marginBottom: rhythm(1.5),
             marginTop: 0,
+            backgroundColor: 'palegreen'
           }}
         >
           <Link
@@ -26,7 +27,7 @@ class Template extends React.Component {
             }}
             to={'/'}
           >
-            Gatsby Starter Blog
+            A Squire's Mumblings
           </Link>
         </h1>
       )
@@ -47,7 +48,7 @@ class Template extends React.Component {
             }}
             to={'/'}
           >
-            Gatsby Starter Blog
+            A Squire's Mumblings
           </Link>
         </h3>
       )
